@@ -3,7 +3,7 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 
 const authDiv = $('#auth');
-const allPinsDiv = $('#allPins');
+const allPinsDiv = $('#boards');
 const logoutButton = $('#navbarButtonLogout');
 
 const logoutEvent = () => {

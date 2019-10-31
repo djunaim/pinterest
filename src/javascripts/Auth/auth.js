@@ -3,7 +3,7 @@ import signInButton from './c74ljgt1t4o1ko28ycm8.png';
 
 const loginButton = () => {
   const domString = `<button id="googleAuth" class="btn btn-primary">
-   <iimg src=${signInButton}/>
+   <img src=${signInButton}/>
   </button>`;
   utilities.printToDOM('auth', domString);
 };

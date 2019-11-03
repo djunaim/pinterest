@@ -1,0 +1,42 @@
+{
+  "userBoardPin1": {
+    "userID": "user1",
+    "pinID": "pin8"
+  },
+  "userBoardPin2": {
+    "userID": "user1",
+    "pinID": "pin9"
+  },
+  "userBoardPin3": {
+    "userID": "user1",
+    "pinID": "pin10"
+  },
+  "userBoardPin4": {
+    "userID": "user2",
+    "pinID": "pin1"
+  },
+  "userBoardPin5": {
+    "userID": "user1",
+    "pinID": "pin2"
+  },
+  "userBoardPin6": {
+    "userID": "user1",
+    "pinID": "pin3"
+  },
+  "userBoardPin7": {
+    "userID": "user1",
+    "pinID": "pin4"
+  },
+  "userBoardPin8": {
+    "userID": "user1",
+    "pinID": "pin5"
+  },
+  "userBoardPin9": {
+    "userID": "user1",
+    "pinID": "pin6"
+  },
+  "userBoardPin10": {
+    "userID": "user1",
+    "pinID": "pin7"
+  }
+}

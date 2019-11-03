@@ -1,0 +1,20 @@
+{
+  "board1": {
+    "type": "Desserts",
+    "private": false,
+    "uid": "TKqPPJe2B1dCFnM8evGB3CkQUx33",
+    "description": "dessert inspiration ideas"
+  },
+  "board2": {
+    "type": "Skin Care Routine",
+    "private": true,
+    "uid": "TKqPPJe2B1dCFnM8evGB3CkQUx33",
+    "description": "skin care products"
+  },
+  "board3": {
+    "type": "Healthy Eating",
+    "private": false,
+    "uid": "12345",
+    "description": "healthy food recipes"
+  }
+}

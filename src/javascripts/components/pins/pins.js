@@ -3,7 +3,7 @@ const makeAPin = (board) => {
   if (board.description) {
     domString += `
     <div class="card col-4">
-      <img src=${board.imageURL} class="card-img-top" alt="...">
+      <img src=${board.pin.imageURL} class="card-img-top" alt="...">
     </div>
     `;
   }

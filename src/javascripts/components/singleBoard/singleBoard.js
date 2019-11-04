@@ -6,7 +6,7 @@ import pins from '../pins/pins';
 const buildSingleBoard = () => {
   smash.getCompleteBoard()
     .then((boards) => {
-      // console.log('it worked', boards);
+      console.log('it worked', boards);
       let domString = '<div id="boardSection" class="d-flex flex-wrap">';
       boards.forEach((board) => {
         domString += pins.makeAPin(board);

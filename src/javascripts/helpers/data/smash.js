@@ -3,17 +3,17 @@ import boardsData from './boardsData';
 import userBoardPinsData from './userBoardPinsData';
 
 const getCompleteBoard = () => new Promise((resolve, reject) => {
-  pinsData.getPins()
-    .then((pins) => {
-      boardsData.getBoard().then((boards) => {
+  boardsData.getBoard()
+    .then((boards) => {
+      pinsData.getPins().then((pins) => {
         userBoardPinsData.getUserBoardPins().then((userBoardPins) => {
           const finalBoard = [];
-          pins.forEach((pin) => {
-            const newPin = { ...pin };
-            const userBoardPinRecord = userBoardPins.find((x) => x.pinID === pin.id);
-            const board = boards.find((x) => x.id === userBoardPinRecord.boardID);
-            newPin.board = board;
-            finalBoard.push(newPin);
+          boards.forEach((board) => {
+            const newBoard = { ...board };
+            const userBoardPinRecord = userBoardPins.find((x) => x.boardID === board.id);
+            const pin = pins.find((x) => x.boardID === userBoardPinRecord.boardID);
+            newBoard.pin = pin;
+            finalBoard.push(newBoard);
           });
           resolve(finalBoard);
         });

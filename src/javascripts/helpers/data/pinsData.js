@@ -3,8 +3,8 @@ import apiKeys from '../apiKeys.json';
 
 const baseUrl = apiKeys.firebaseKeys.databaseURL;
 
-const getPins = (uid) => new Promise((resolve, reject) => {
-  axios.get(`${baseUrl}/pins.json?orderBy="uid"&equalTo="${uid}"`)
+const getPins = () => new Promise((resolve, reject) => {
+  axios.get(`${baseUrl}/pins.json`)
     .then((response) => {
       const demPins = response.data;
       const pins = [];

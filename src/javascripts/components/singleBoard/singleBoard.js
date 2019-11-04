@@ -1,10 +1,18 @@
 import './singleBoard.scss';
-import boardsData from '../../helpers/data/boardsData';
+import smash from '../../helpers/data/smash';
+import utilities from '../../helpers/utilities';
+import pins from '../pins/pins';
 
 const buildSingleBoard = () => {
-  boardsData.getBoard()
+  smash.getCompleteBoard()
     .then((boards) => {
-      console.log('it worked', boards);
+      // console.log('it worked', boards);
+      let domString = '<div id="boardSection" class="d-flex flex-wrap">';
+      boards.forEach((board) => {
+        domString += pins.makeAPin(board);
+      });
+      domString += '</div>';
+      utilities.printToDOM('boards', domString);
     })
     .catch((error) => console.error(error));
 };

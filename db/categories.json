@@ -1,0 +1,10 @@
+{
+  "category1": {
+    "category": "food",
+    "description": "recipe"
+  },
+  "category2": {
+    "category": "skin care",
+    "description": "product"
+  }
+}

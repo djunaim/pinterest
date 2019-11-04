@@ -1,0 +1,72 @@
+{
+  "pin1": {
+    "imageURL": "https://pbs.twimg.com/profile_images/591242131857022976/9N9RVVon.jpg",
+    "siteURL": "https://www.curiouscuisiniere.com/cendol-iced-malaysian-dessert/",
+    "categoryID": "category1",
+    "description": "iced sweet dessert containing droplets of green rice flour jelly, coconut milk, and palm sugar syrup",
+    "boardID": "board1"
+  },
+  "pin2": {
+    "imageURL": "https://ngulikkuliner.files.wordpress.com/2017/08/cymera_20170717_211520.jpg?w=256&h=256&crop=1",
+    "siteURL": "https://dailycookingquest.com/lapis-legit-thousand-layers-cake.html",
+    "categoryID": "category1",
+    "description": "Spekkoek is a type of Indonesian layer cake. It was developed during colonial times in the Dutch East Indies.",
+    "boardID": "board1"
+  },
+  "pin3": {
+    "imageURL": "https://cdn141.picsart.com/295978367044201.jpg?c256x256",
+    "siteURL": "https://bake-street.com/en/kue-nastar/",
+    "categoryID": "category1",
+    "description": "Pineapple tarts or nanas tart are small, bite-size pastries filled or topped with pineapple jam, originating from Indonesia, but found in different parts of Asia.",
+    "boardID": "board1"
+  },
+  "pin4": {
+    "imageURL": "https://raviza.files.wordpress.com/2007/09/kuesalju.thumbnail.jpg?w=277&h=166",
+    "siteURL": "https://whattocooktoday.com/chinese-new-year-kue-putri-salju-snow-white-cookies.html",
+    "categoryID": "category1",
+    "description": "Putri salju cookie is a kind of kue kering from Indonesia which is crescent-shaped and coated with powdered sugar covered like snow.",
+    "boardID": "board1"
+  },
+  "pin5": {
+    "imageURL": "https://b3h2.scene7.com/is/image/BedBathandBeyond/156052820509651p?$imagePLP$&wid=256",
+    "siteURL": "https://sokoglam.com/",
+    "categoryID": "category2",
+    "description": "face mask",
+    "boardID": "board2"
+  },
+  "pin6": {
+    "imageURL": "https://pm1.narvii.com/6684/64bfd3ba1095afe987d32590d8324aee097e72c1_128.jpg",
+    "siteURL": "https://sokoglam.com/",
+    "categoryID": "category2",
+    "description": "ampoule",
+    "boardID": "board2"
+  },
+  "pin7": {
+    "imageURL": "https://www.ahlens.se/INTERSHOP/static/WFS/Ahlens-AhlensSE-Site/-/Ahlens/sv_SE/ProductList/41APWLHECJ_8809325903643_front.jpg",
+    "siteURL": "https://sokoglam.com/",
+    "categoryID": "category2",
+    "description": "foam cleanser",
+    "boardID": "board2"
+  },
+  "pin8": {
+    "imageURL": "https://bigoven-res.cloudinary.com/image/upload/t_recipe-256/sweet-potato-spinach-lasagna-1496328.jpg",
+    "siteURL": "https://www.notenoughcinnamon.com/skinny-moussaka-aka-delicious-beef-eggplant-casserole/",
+    "categoryID": "category1",
+    "description": "skinny moussaka",
+    "boardID": "board3"
+  },
+  "pin9": {
+    "imageURL": "https://www.aspicyperspective.com/wp-content/uploads/2019/08/thai-baked-turkey-meatballs-16-256x256.jpg",
+    "siteURL": "https://www.beachbodyondemand.com/blog/slow-cooker-turkey-meatballs",
+    "categoryID": "category1",
+    "description": "Sslow cooker turkey meatballs",
+    "boardID": "board3"
+  },
+  "pin10": {
+    "imageURL": "https://photos.bigoven.com/recipe/hero/freezer-friendly-breakfast-burritos.jpg?h=300&w=300",
+    "siteURL": "https://www.simplysissom.com/whole-food-breakfast-burritos-freezer-friendly/",
+    "categoryID": "category1",
+    "description": "breakfast burrito",
+    "boardID": "board3"
+  }
+}

@@ -1,3 +1,6 @@
+// import firebase from 'firebase/app';
+import 'firebase/auth';
+
 import './singleBoard.scss';
 // import smash from '../../helpers/data/smash';
 // import utilities from '../../helpers/utilities';
@@ -20,6 +23,7 @@ import boardsData from '../../helpers/data/boardsData';
 // };
 
 const buildSingleBoard = () => {
+  // const { uid } = firebase.auth().currentUser;
   boardsData.getBoardByUid()
     .then((boards) => {
       console.log('it worked', boards);

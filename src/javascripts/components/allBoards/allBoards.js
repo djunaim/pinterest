@@ -1,7 +1,4 @@
-import firebase from 'firebase/app';
-import 'firebase/auth';
-
-import './singleBoard.scss';
+import './allBoards.scss';
 // import smash from '../../helpers/data/smash';
 // import utilities from '../../helpers/utilities';
 // import pins from '../pins/pins';
@@ -22,8 +19,7 @@ import boardsData from '../../helpers/data/boardsData';
 //     .catch((error) => console.error(error));
 // };
 
-const buildSingleBoard = () => {
-  const { uid } = firebase.auth().currentUser;
+const buildAllBoard = (uid) => {
   boardsData.getBoardByUid(uid)
     .then((boards) => {
       console.log('it worked', boards);
@@ -31,4 +27,4 @@ const buildSingleBoard = () => {
     .catch((error) => console.error(error));
 };
 
-export default { buildSingleBoard };
+export default { buildAllBoard };

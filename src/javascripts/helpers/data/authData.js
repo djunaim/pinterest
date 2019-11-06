@@ -1,6 +1,7 @@
 import $ from 'jquery';
 import firebase from 'firebase/app';
 import 'firebase/auth';
+import allBoards from '../../components/allBoards/allBoards';
 
 const authDiv = $('#auth');
 const allPinsDiv = $('#boards');
@@ -14,6 +15,7 @@ const checkLoginStatus = () => {
       logoutNavbar.removeClass('hide');
       authDiv.addClass('hide');
       home.addClass('hide');
+      allBoards.buildAllBoard(user.uid);
     } else {
       allPinsDiv.addClass('hide');
       logoutNavbar.addClass('hide');
@@ -23,4 +25,6 @@ const checkLoginStatus = () => {
   });
 };
 
-export default { checkLoginStatus };
+const getCurrentUid = () => firebase.auth().currentUser.uid;
+
+export default { checkLoginStatus, getCurrentUid };

@@ -22,6 +22,32 @@ import pinsPrint from '../pins/pins';
 //     .catch((error) => console.error(error));
 // };
 
+const deletePin = (e) => {
+  e.preventDefault();
+  // const { uid } = firebase.auth().currentUser;
+  console.log(e.target.id);
+  pinsData.deletePin(e.target.id)
+    .then((pins) => {
+      // eslint-disable-next-line no-use-before-define
+      showSingleBoard(pins.boardID);
+      // let domString = '';
+      // if (pins.id === ) {
+      //   domString += `
+      //   <div class="card col">
+      //   <img src="${pins.imageURL}" class="card-img-top" alt="...">
+      //     <div class="card-body">
+      //       <h5 class="card-title">${pins.siteURL}</h5>
+      //       <p class="card-text">${pins.description}</p>
+      //       <button href="#" class="btn btn-primary deletePin" id="${pins.id}">Delete</button>
+      //     </div>
+      //   </div>
+      //   `;
+      // }
+      // utilities.printToDOM('boards', domString);
+    })
+    .catch((error) => console.error(error));
+};
+
 const close = () => {
   const { uid } = firebase.auth().currentUser;
   $(document).click((e) => {
@@ -60,6 +86,8 @@ const buildAllBoard = (uid) => {
       domString += '</div>';
       utilities.printToDOM('boards', domString);
       $('#boards').on('click', '.boardCard', showSingleBoard);
+      $('#boards').on('click', '.deletePin', deletePin);
+      // $('#boards').on('click', '.deleteBoard', deleteBoard);
     })
     .catch((error) => console.error(error));
 };

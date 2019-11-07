@@ -1,10 +1,14 @@
-const makeAPin = (board) => {
+const makeAPin = (pin) => {
   let domString = '';
-  if (board.id) {
+  if (pin.id) {
     domString += `
     <div class="card col-4">
-      <p>${board.description}</p>
+    <img src="${pin.imageURL}" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">${pin.siteURL}</h5>
+      <p class="card-text">${pin.description}</p>
     </div>
+  </div>
     `;
   }
   return domString;

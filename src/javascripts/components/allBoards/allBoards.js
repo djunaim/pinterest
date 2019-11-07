@@ -38,7 +38,7 @@ const showSingleBoard = (e) => {
   pinsData.getPinsByBoardId(boardID)
     .then((pins) => {
       console.log('here are the pins', pins);
-      let domString = '<div id="boardSection" class="d-flex flex-wrap"><span><button class="closeButton">x</button><span>';
+      let domString = '<div id="boardSection" class="d-flex flex-wrap container"><span><button class="closeButton">x</button><span>';
       pins.forEach((pin) => {
         domString += pinsPrint.makeAPin(pin);
       });

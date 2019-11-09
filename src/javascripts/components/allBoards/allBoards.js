@@ -20,6 +20,24 @@ const deletePin = (e) => {
     .catch((error) => console.error(error));
 };
 
+const addNewPin = (e) => {
+  e.stopImmediatePropagation();
+  const boardID = e.target.getAttribute('storeBoardID');
+  const newPin = {
+    imageURL: $('#pinImageURL').val(),
+    siteURL: $('#pinSiteURL').val(),
+    description: $('#pinDescription').val(),
+    boardID,
+  };
+  pinsData.addPin(newPin)
+    .then(() => {
+      $('#pinModal').modal('hide');
+      // eslint-disable-next-line no-use-before-define
+      showSingleBoard(boardID);
+    })
+    .catch((error) => console.error(error));
+};
+
 const close = () => {
   const { uid } = firebase.auth().currentUser;
   $(document).click((e) => {
@@ -27,6 +45,8 @@ const close = () => {
     if (buttonName === 'closeButton') {
       // eslint-disable-next-line no-use-before-define
       buildAllBoard(uid);
+      $('#newBoardButton').removeClass('hide');
+      $('#newPinButton').addClass('hide');
     }
   });
 };
@@ -38,10 +58,14 @@ const showSingleBoard = (boardID) => {
       let domString = '<div id="boardSection" class="d-flex flex-wrap container"><span><button class="closeButton">x</button><span>';
       pins.forEach((pin) => {
         domString += pinsPrint.makeAPin(pin);
+        $('#newBoardButton').addClass('hide');
+        $('#newPinButton').removeClass('hide');
       });
       domString += '</div>';
-      utilities.printToDOM('boards', domString);
+      utilities.printToDOM('printBoard', domString);
+      $('#addNewPin').attr('storeBoardID', boardID);
       $('#boardSection').on('click', '.closeButton', close);
+      $('#newPinButton').removeClass('hide');
     })
     .catch((error) => console.error(error));
 };
@@ -67,6 +91,24 @@ const deleteBoard = (e) => {
     .catch((error) => console.error(error));
 };
 
+const addNewBoard = (e) => {
+  e.stopImmediatePropagation();
+  const { uid } = firebase.auth().currentUser;
+  const newBoard = {
+    type: $('#boardType').val(),
+    private: console.log($('#privacy:checkbox:checked').length > 0),
+    uid,
+    description: $('#boardDescription').val(),
+  };
+  boardsData.addBoard(newBoard)
+    .then(() => {
+      $('#exampleModal').modal('hide');
+      // eslint-disable-next-line no-use-before-define
+      buildAllBoard(uid);
+    })
+    .catch((error) => console.error(error));
+};
+
 const buildAllBoard = (uid) => {
   boardsData.getBoardByUid(uid)
     .then((boards) => {
@@ -76,10 +118,13 @@ const buildAllBoard = (uid) => {
         domString += boardsPrint.makeABoard(board);
       });
       domString += '</div>';
-      utilities.printToDOM('boards', domString);
+      utilities.printToDOM('printBoard', domString);
       $('#boards').on('click', '.boardCard', showSingleBoardEventHandler);
       $('#boards').on('click', '.deletePin', (e) => deletePin(e));
       $('#boards').on('click', '.deleteBoard', deleteBoard);
+      $('#addNewBoard').click(addNewBoard);
+      $('#addNewPin').click(addNewPin);
+      $('#newPinButton').addClass('hide');
     })
     .catch((error) => console.error(error));
 };

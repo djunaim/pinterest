@@ -7,6 +7,7 @@ import boardsPrint from '../boards/boards';
 import boardsData from '../../helpers/data/boardsData';
 import pinsData from '../../helpers/data/pinsData';
 import pinsPrint from '../pins/pins';
+// import singleBoard from '../singleBoard/singleBoard';
 
 // const buildSingleBoard = () => {
 //   smash.getCompleteBoard()
@@ -25,11 +26,11 @@ import pinsPrint from '../pins/pins';
 const deletePin = (e) => {
   e.preventDefault();
   // const { uid } = firebase.auth().currentUser;
-  console.log(e.target.id);
   pinsData.deletePin(e.target.id)
     .then((pins) => {
+      console.log(pins);
       // eslint-disable-next-line no-use-before-define
-      showSingleBoard(pins.boardID);
+      // $('#boards').on('click', '.boardCard', showSingleBoard);
       // let domString = '';
       // if (pins.id === ) {
       //   domString += `
@@ -70,7 +71,7 @@ const showSingleBoard = (e) => {
       });
       domString += '</div>';
       utilities.printToDOM('boards', domString);
-      $('#boards').on('click', '.closeButton', close);
+      $('#boardSection').on('click', '.closeButton', close);
     })
     .catch((error) => console.error(error));
 };

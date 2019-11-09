@@ -1,15 +1,16 @@
 import './singleBoard.scss';
 import utilities from '../../helpers/utilities';
-import boardsPrint from '../boards/boards';
-import boardsData from '../../helpers/data/boardsData';
+import pinsPrint from '../pins/pins';
+import pinsData from '../../helpers/data/pinsData';
 
-const buildAllBoard = (uid) => {
-  boardsData.getBoardByUid(uid)
-    .then((boards) => {
-      console.log('it worked', boards);
-      let domString = '<div id="boardSection" class="d-flex flex-wrap">';
-      boards.forEach((board) => {
-        domString += boardsPrint.makeABoard(board);
+const buildSingleBoard = (e) => {
+  const boardID = e.target.id;
+  pinsData.getPinsByBoardId(boardID)
+    .then((pins) => {
+      console.log('here are the pins', pins);
+      let domString = '<div id="boardSection" class="d-flex flex-wrap container"><span><button class="closeButton">x</button><span>';
+      pins.forEach((pin) => {
+        domString += pinsPrint.makeAPin(pin);
       });
       domString += '</div>';
       utilities.printToDOM('boards', domString);
@@ -17,4 +18,4 @@ const buildAllBoard = (uid) => {
     .catch((error) => console.error(error));
 };
 
-export default { buildAllBoard };
+export default { buildSingleBoard };

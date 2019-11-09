@@ -7,6 +7,7 @@ const makeAPin = (pin) => {
       <div class="card-body">
         <h5 class="card-title">${pin.siteURL}</h5>
         <p class="card-text">${pin.description}</p>
+        <button href="#" class="btn btn-primary deletePin" id="${pin.id}" databoardid="${pin.boardID}">Delete</button>
       </div>
     </div>
     `;

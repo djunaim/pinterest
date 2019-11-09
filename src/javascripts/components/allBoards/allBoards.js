@@ -9,20 +9,6 @@ import pinsData from '../../helpers/data/pinsData';
 import pinsPrint from '../pins/pins';
 // import singleBoard from '../singleBoard/singleBoard';
 
-// const buildSingleBoard = () => {
-//   smash.getCompleteBoard()
-//     .then((boards) => {
-//       console.log('it worked', boards);
-//       let domString = '<div id="boardSection" class="d-flex flex-wrap">';
-//       boards.forEach((board) => {
-//         domString += pins.makeAPin(board);
-//       });
-//       domString += '</div>';
-//       utilities.printToDOM('boards', domString);
-//     })
-//     .catch((error) => console.error(error));
-// };
-
 const deletePin = (e) => {
   e.preventDefault();
   pinsData.deletePin(e.target.id)
@@ -48,7 +34,7 @@ const close = () => {
 const showSingleBoard = (boardID) => {
   pinsData.getPinsByBoardId(boardID)
     .then((pins) => {
-      console.log('here are the pins', pins);
+      // console.log('here are the pins', pins);
       let domString = '<div id="boardSection" class="d-flex flex-wrap container"><span><button class="closeButton">x</button><span>';
       pins.forEach((pin) => {
         domString += pinsPrint.makeAPin(pin);
@@ -65,10 +51,26 @@ const showSingleBoardEventHandler = (e) => {
   showSingleBoard(boardID);
 };
 
+const deleteBoard = (e) => {
+  e.preventDefault();
+  const { uid } = firebase.auth().currentUser;
+  const boardID = e.target.id.split('board-')[1];
+  console.log(boardID);
+  boardsData.deleteBoard(boardID)
+    .then(() => {
+      pinsData.getPinsByBoardId(boardID).then((pins) => {
+        pins.forEach((pin) => pinsData.deletePin(pin.id));
+      });
+      // eslint-disable-next-line no-use-before-define
+      buildAllBoard(uid);
+    })
+    .catch((error) => console.error(error));
+};
+
 const buildAllBoard = (uid) => {
   boardsData.getBoardByUid(uid)
     .then((boards) => {
-      console.log('here are the boards', boards);
+      // console.log('here are the boards', boards);
       let domString = '<div id="boardSection" class="d-flex flex-wrap">';
       boards.forEach((board) => {
         domString += boardsPrint.makeABoard(board);
@@ -77,7 +79,7 @@ const buildAllBoard = (uid) => {
       utilities.printToDOM('boards', domString);
       $('#boards').on('click', '.boardCard', showSingleBoardEventHandler);
       $('#boards').on('click', '.deletePin', (e) => deletePin(e));
-      // $('#boards').on('click', '.deleteBoard', deleteBoard);
+      $('#boards').on('click', '.deleteBoard', deleteBoard);
     })
     .catch((error) => console.error(error));
 };

@@ -38,6 +38,31 @@ const addNewPin = (e) => {
     .catch((error) => console.error(error));
 };
 
+const updatePin = (e) => {
+  e.stopImmediatePropagation();
+  const { uid } = firebase.auth().currentUser;
+  const inputText = $('#pinType').val();
+  // console.log(inputText);
+  boardsData.getBoardByUid(uid)
+    .then((boards) => {
+      const selectedBoard = boards.find((x) => x.type.toLowerCase() === inputText.toLowerCase());
+      console.log(selectedBoard);
+      if (selectedBoard) {
+        const newPinBoard = {
+          imageURL: '',
+          siteURL: '',
+          description: '',
+          boardID: selectedBoard.id,
+        };
+        pinsData.updateNewPin(newPinBoard).then(() => {
+          // eslint-disable-next-line no-use-before-define
+          showSingleBoard(selectedBoard.id);
+        });
+      }
+    })
+    .catch((error) => console.error(error));
+};
+
 const close = () => {
   const { uid } = firebase.auth().currentUser;
   $(document).click((e) => {
@@ -65,6 +90,7 @@ const showSingleBoard = (boardID) => {
       utilities.printToDOM('printBoard', domString);
       $('#addNewPin').attr('storeBoardID', boardID);
       $('#boardSection').on('click', '.closeButton', close);
+      $('#updatePin').click(updatePin);
       $('#newPinButton').removeClass('hide');
     })
     .catch((error) => console.error(error));

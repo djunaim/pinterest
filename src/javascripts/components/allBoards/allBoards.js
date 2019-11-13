@@ -40,7 +40,6 @@ const addNewPin = (e) => {
 };
 
 const updatePin = (pinID) => {
-  console.log('from update pin', pinID);
   const { uid } = firebase.auth().currentUser;
   const inputText = $('#pinType').val();
   // console.log(inputText);
@@ -48,14 +47,15 @@ const updatePin = (pinID) => {
     .then((boards) => {
       const selectedBoard = boards.find((x) => x.type.toLowerCase() === inputText.toLowerCase());
       // figure out toLowercase()
-      console.log('selected board', selectedBoard.type, inputText);
+      // console.log('selected board', selectedBoard.type.toLowerCase(), inputText);
       if (selectedBoard.type.toLowerCase() === inputText) {
         pinsData.getPin(pinID).then(() => {
+          console.log('from pinsdata get pin', pinID);
           const newPin = {
             boardID: selectedBoard.id,
           };
           console.log('new pin', newPin);
-          pinsData.updateNewPin(newPin).then(() => {
+          pinsData.getPin(newPin).then(() => {
             // eslint-disable-next-line no-use-before-define
             showSingleBoard(selectedBoard.id);
           });
@@ -109,7 +109,6 @@ const showSingleBoard = (boardID) => {
       utilities.printToDOM('printBoard', domString);
       $('#addNewPin').attr('storeBoardID', boardID);
       $('#boardSection').on('click', '.closeButton', close);
-      $('.updatePinButton').click(updatePinEventListener);
       $('#updatePin').click(updatePinEventListener);
       $('#newPinButton').removeClass('hide');
     })

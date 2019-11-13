@@ -10,38 +10,9 @@ const makeAPin = (pin) => {
         <h5 class="card-title">${pin.siteURL}</h5>
         <p class="card-text">${pin.description}</p>
         <button href="#" class="btn btn-danger deletePin" id="${pin.id}" databoardid="${pin.boardID}">Delete</button>
-
-        <!-- Button trigger modal -->
-<button type="button" id="pin-${pin.id}" class="btn btn-primary updatePinButton" data-toggle="modal" data-target="#updatePinModal">
-  Update Pin
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="updatePinModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+        <button type="button" id="pin-${pin.id}" class="btn btn-primary updatePinButton" data-toggle="modal" data-target="#updatePinModal">
+          Update Pin
         </button>
-      </div>
-      <div class="modal-body">
-      <form>
-      <div class="form-group">
-        <label for="pinType">Type</label>
-        <input type="text" class="form-control" id="pinType" placeholder="Enter Name">
-      </div>
-    </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" id="updatePin">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-
       </div>
     </div>
     `;

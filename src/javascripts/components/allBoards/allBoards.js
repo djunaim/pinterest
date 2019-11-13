@@ -8,6 +8,7 @@ import boardsData from '../../helpers/data/boardsData';
 import pinsData from '../../helpers/data/pinsData';
 import pinsPrint from '../pins/pins';
 // import singleBoard from '../singleBoard/singleBoard';
+// import smash from '../../helpers/data/smash';
 
 const deletePin = (e) => {
   e.preventDefault();
@@ -38,30 +39,48 @@ const addNewPin = (e) => {
     .catch((error) => console.error(error));
 };
 
-const updatePin = (e) => {
-  e.stopImmediatePropagation();
+const updatePin = (pinID) => {
   const { uid } = firebase.auth().currentUser;
   const inputText = $('#pinType').val();
   // console.log(inputText);
   boardsData.getBoardByUid(uid)
     .then((boards) => {
       const selectedBoard = boards.find((x) => x.type.toLowerCase() === inputText.toLowerCase());
-      console.log(selectedBoard);
-      if (selectedBoard) {
-        const newPinBoard = {
-          imageURL: '',
-          siteURL: '',
-          description: '',
-          boardID: selectedBoard.id,
-        };
-        pinsData.updateNewPin(newPinBoard).then(() => {
-          // eslint-disable-next-line no-use-before-define
-          showSingleBoard(selectedBoard.id);
+      // figure out toLowercase()
+      // console.log('selected board', selectedBoard.type.toLowerCase(), inputText);
+      if (selectedBoard.type.toLowerCase() === inputText) {
+        pinsData.getPin(pinID).then(() => {
+          console.log('from pinsdata get pin', pinID);
+          const newPin = {
+            boardID: selectedBoard.id,
+          };
+          console.log('new pin', newPin.boardID);
+          pinsData.getPin(pinID, newPin.boardID).then(() => {
+            // eslint-disable-next-line no-use-before-define
+            showSingleBoard(newPin.boardID);
+          });
         });
       }
     })
     .catch((error) => console.error(error));
 };
+
+const updatePinEventListener = (e) => {
+  e.stopImmediatePropagation();
+  const pinID = e.target.id.split('updatePin-')[1];
+  console.log('from eventListener pin id', pinID);
+  updatePin(pinID);
+};
+
+// const updatePin = (e) => {
+//   e.stopImmediatePropagation();
+//   // const { uid } = firebase.auth().currentUser;
+//   const inputText = $('#pinType').val();
+//   console.log(inputText);
+//   smash.getCompleteBoard()
+//     .then((complete) => console.log('smash', complete))
+//     .catch((error) => console.error(error));
+// };
 
 const close = () => {
   const { uid } = firebase.auth().currentUser;
@@ -90,7 +109,7 @@ const showSingleBoard = (boardID) => {
       utilities.printToDOM('printBoard', domString);
       $('#addNewPin').attr('storeBoardID', boardID);
       $('#boardSection').on('click', '.closeButton', close);
-      $('#updatePin').click(updatePin);
+      $('#updatePinModal').on('click', '.updatePin', updatePinEventListener);
       $('#newPinButton').removeClass('hide');
     })
     .catch((error) => console.error(error));

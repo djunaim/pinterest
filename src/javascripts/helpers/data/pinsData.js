@@ -23,13 +23,14 @@ const addPin = (newPin) => axios.post(`${baseUrl}/pins.json`, newPin);
 
 const updateNewPin = (pinsID, newPinBoard) => axios.put(`${baseUrl}/pins/${pinsID}.json`, newPinBoard);
 
-const getPin = (pinID, newBoardID) => new Promise((resolve, reject) => {
-  axios.get(`${baseUrl}/pins/${pinID}.json`)
+const getPin = (pinsID, newBoardID) => new Promise((resolve, reject) => {
+  axios.get(`${baseUrl}/pins/${pinsID}.json`)
     .then((result) => {
       const pinObject = result.data;
       console.log('from getPin', pinObject);
       pinObject.boardID = newBoardID;
-      updateNewPin(pinID, pinObject);
+      console.log('from getPin pinID', newBoardID);
+      updateNewPin(pinsID, pinObject);
       resolve();
     })
     .catch((error) => reject(error));

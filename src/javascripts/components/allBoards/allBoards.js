@@ -54,10 +54,10 @@ const updatePin = (pinID) => {
           const newPin = {
             boardID: selectedBoard.id,
           };
-          console.log('new pin', newPin);
-          pinsData.getPin(newPin).then(() => {
+          console.log('new pin', newPin.boardID);
+          pinsData.getPin(pinID, newPin.boardID).then(() => {
             // eslint-disable-next-line no-use-before-define
-            showSingleBoard(selectedBoard.id);
+            showSingleBoard(newPin.boardID);
           });
         });
       }
@@ -66,9 +66,9 @@ const updatePin = (pinID) => {
 };
 
 const updatePinEventListener = (e) => {
-  // e.stopImmediatePropagation();
-  const pinID = e.target.id.split('pin-')[1];
-  console.log('pin id', pinID);
+  e.stopImmediatePropagation();
+  const pinID = e.target.id.split('updatePin-')[1];
+  console.log('from eventListener pin id', pinID);
   updatePin(pinID);
 };
 
@@ -109,7 +109,7 @@ const showSingleBoard = (boardID) => {
       utilities.printToDOM('printBoard', domString);
       $('#addNewPin').attr('storeBoardID', boardID);
       $('#boardSection').on('click', '.closeButton', close);
-      $('#updatePin').click(updatePinEventListener);
+      $('#updatePinModal').on('click', '.updatePin', updatePinEventListener);
       $('#newPinButton').removeClass('hide');
     })
     .catch((error) => console.error(error));

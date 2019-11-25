@@ -42,7 +42,6 @@ const updatePin = (e) => {
   const pinID = e.target.id.split('updatePin-')[1];
   $('.updatePin').on('click', () => {
     const boardID = $('input[name=boardRadios]:checked').val();
-    console.log('from update pin listener', boardID);
     pinsData.getPin(pinID, boardID)
       .then(() => {
         $('#updatePinModal').modal('hide');
@@ -112,6 +111,7 @@ const addNewBoard = (e) => {
   e.stopImmediatePropagation();
   const { uid } = firebase.auth().currentUser;
   const newBoard = {
+    imageURL: $('#boardImageURL').val(),
     type: $('#boardType').val(),
     private: $('#privacy:checkbox:checked').length > 0,
     uid,

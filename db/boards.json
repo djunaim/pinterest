@@ -1,18 +1,21 @@
 {
   "board1": {
     "type": "Desserts",
+    "imageURL": "https://pbs.twimg.com/profile_images/591242131857022976/9N9RVVon.jpg",
     "private": false,
     "uid": "TKqPPJe2B1dCFnM8evGB3CkQUx33",
     "description": "dessert inspiration ideas"
   },
   "board2": {
     "type": "Skin Care Routine",
+    "imageURL": "https://b3h2.scene7.com/is/image/BedBathandBeyond/156052820509651p?$imagePLP$&wid=256",
     "private": true,
     "uid": "TKqPPJe2B1dCFnM8evGB3CkQUx33",
     "description": "skin care products"
   },
   "board3": {
     "type": "Healthy Eating",
+    "imageURL": "https://bigoven-res.cloudinary.com/image/upload/t_recipe-256/sweet-potato-spinach-lasagna-1496328.jpg",
     "private": false,
     "uid": "12345",
     "description": "healthy food recipes"

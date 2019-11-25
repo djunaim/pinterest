@@ -7,8 +7,6 @@ import boardsPrint from '../boards/boards';
 import boardsData from '../../helpers/data/boardsData';
 import pinsData from '../../helpers/data/pinsData';
 import pinsPrint from '../pins/pins';
-// import singleBoard from '../singleBoard/singleBoard';
-// import smash from '../../helpers/data/smash';
 
 const deletePin = (e) => {
   e.preventDefault();
@@ -39,48 +37,19 @@ const addNewPin = (e) => {
     .catch((error) => console.error(error));
 };
 
-const updatePin = (pinID) => {
-  const { uid } = firebase.auth().currentUser;
-  const inputText = $('#pinType').val();
-  // console.log(inputText);
-  boardsData.getBoardByUid(uid)
-    .then((boards) => {
-      const selectedBoard = boards.find((x) => x.type.toLowerCase() === inputText.toLowerCase());
-      // figure out toLowercase()
-      // console.log('selected board', selectedBoard.type.toLowerCase(), inputText);
-      if (selectedBoard.type.toLowerCase() === inputText) {
-        pinsData.getPin(pinID).then(() => {
-          console.log('from pinsdata get pin', pinID);
-          const newPin = {
-            boardID: selectedBoard.id,
-          };
-          console.log('new pin', newPin.boardID);
-          pinsData.getPin(pinID, newPin.boardID).then(() => {
-            // eslint-disable-next-line no-use-before-define
-            showSingleBoard(newPin.boardID);
-          });
-        });
-      }
-    })
-    .catch((error) => console.error(error));
-};
-
-const updatePinEventListener = (e) => {
+const updatePin = (e) => {
   e.stopImmediatePropagation();
   const pinID = e.target.id.split('updatePin-')[1];
-  console.log('from eventListener pin id', pinID);
-  updatePin(pinID);
+  $('.updatePin').on('click', () => {
+    const boardID = $('input[name=boardRadios]:checked').val();
+    pinsData.getPin(pinID, boardID)
+      .then(() => {
+        $('#updatePinModal').modal('hide');
+        // eslint-disable-next-line no-use-before-define
+        showSingleBoard(boardID);
+      });
+  });
 };
-
-// const updatePin = (e) => {
-//   e.stopImmediatePropagation();
-//   // const { uid } = firebase.auth().currentUser;
-//   const inputText = $('#pinType').val();
-//   console.log(inputText);
-//   smash.getCompleteBoard()
-//     .then((complete) => console.log('smash', complete))
-//     .catch((error) => console.error(error));
-// };
 
 const close = () => {
   const { uid } = firebase.auth().currentUser;
@@ -104,12 +73,13 @@ const showSingleBoard = (boardID) => {
         domString += pinsPrint.makeAPin(pin);
         $('#newBoardButton').addClass('hide');
         $('#newPinButton').removeClass('hide');
+        $('.updatePin').attr('id', `updatePin-${pin.id}`);
       });
       domString += '</div>';
       utilities.printToDOM('printBoard', domString);
       $('#addNewPin').attr('storeBoardID', boardID);
       $('#boardSection').on('click', '.closeButton', close);
-      $('#updatePinModal').on('click', '.updatePin', updatePinEventListener);
+      $('#updatePinModal').on('click', '.updatePin', updatePin);
       $('#newPinButton').removeClass('hide');
     })
     .catch((error) => console.error(error));
@@ -117,6 +87,7 @@ const showSingleBoard = (boardID) => {
 
 const showSingleBoardEventHandler = (e) => {
   const boardID = e.target.id;
+  console.log('from show single board event handler', boardID);
   showSingleBoard(boardID);
 };
 
@@ -124,7 +95,7 @@ const deleteBoard = (e) => {
   e.preventDefault();
   const { uid } = firebase.auth().currentUser;
   const boardID = e.target.id.split('board-')[1];
-  console.log(boardID);
+  console.log('from delete board', boardID);
   boardsData.deleteBoard(boardID)
     .then(() => {
       pinsData.getPinsByBoardId(boardID).then((pins) => {
@@ -140,8 +111,9 @@ const addNewBoard = (e) => {
   e.stopImmediatePropagation();
   const { uid } = firebase.auth().currentUser;
   const newBoard = {
+    imageURL: $('#boardImageURL').val(),
     type: $('#boardType').val(),
-    private: console.log($('#privacy:checkbox:checked').length > 0),
+    private: $('#privacy:checkbox:checked').length > 0,
     uid,
     description: $('#boardDescription').val(),
   };
@@ -162,11 +134,18 @@ const buildAllBoard = (uid) => {
       boards.forEach((board) => {
         domString += boardsPrint.makeABoard(board);
       });
+      //  have domString2 to dynamically print newboards as radio options
+      let domString2 = '<div>';
+      boards.forEach((board) => {
+        domString2 += boardsPrint.boardRadioOptions(board);
+      });
       domString += '</div>';
+      domString2 += '</div>';
       utilities.printToDOM('printBoard', domString);
-      $('#boards').on('click', '.boardCard', showSingleBoardEventHandler);
-      $('#boards').on('click', '.deletePin', (e) => deletePin(e));
-      $('#boards').on('click', '.deleteBoard', deleteBoard);
+      utilities.printToDOM('updatePinBoard', domString2);
+      $(document).on('click', '.boardCard', showSingleBoardEventHandler);
+      $(document).on('click', '.deletePin', (e) => deletePin(e));
+      $(document).on('click', '.deleteBoard', deleteBoard);
       $('#addNewBoard').click(addNewBoard);
       $('#addNewPin').click(addNewPin);
       $('#newPinButton').addClass('hide');

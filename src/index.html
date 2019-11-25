@@ -51,6 +51,10 @@
                 <input type="text" class="form-control" id="boardDescription" placeholder="Enter Description">
               </div>
               <div class="form-group">
+                <label for="boardImageURL">Image URL</label>
+                <input type="text" class="form-control" id="boardImageURL" placeholder="Enter URL">
+              </div>
+              <div class="form-group">
                 Make board private <input id="privacy" type="checkbox" aria-label="Checkbox for following text input">
               </div>
             </form>
@@ -101,8 +105,34 @@
           </div>
         </div>
 
-    <div id="printBoard"></div>
+        
+        <!-- Modal -->
+        <div class="modal fade" id="updatePinModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+              <form>
+              <div class="form-group" id="updatePinBoard">
+              </div>
+            </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary updatePin">Save changes</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+  <div id="printBoard"></div>
   <div id="home"><h1>HOME</h1></div>
 </body>
 </html>

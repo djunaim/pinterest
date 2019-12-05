@@ -39,16 +39,23 @@ const addNewPin = (e) => {
 
 const updatePin = (e) => {
   e.stopImmediatePropagation();
+  const { uid } = firebase.auth().currentUser;
   const pinID = e.target.id.split('updatePin-')[1];
-  $('.updatePin').on('click', () => {
-    const boardID = $('input[name=boardRadios]:checked').val();
-    pinsData.getPin(pinID, boardID)
-      .then(() => {
-        $('#updatePinModal').modal('hide');
-        // eslint-disable-next-line no-use-before-define
-        showSingleBoard(boardID);
-      });
-  });
+  // console.log('from updatePin pinId', pinID);
+  const boardID = $('input[name=boardRadios]:checked').val();
+  // console.log('from updatePin boardId', boardID);
+  pinsData.getPin(pinID, boardID)
+    .then(() => {
+      $('#updatePinModal').modal('hide');
+    });
+  // eslint-disable-next-line no-use-before-define
+  buildAllBoard(uid);
+};
+
+const updatePinHandler = (e) => {
+  const pinID = e.target.id.split('pin-')[1];
+  // console.log('from updatePinHandler', pinID);
+  $('.saveUpdatePinButton').attr('id', `updatePin-${pinID}`);
 };
 
 const close = () => {
@@ -67,19 +74,20 @@ const close = () => {
 const showSingleBoard = (boardID) => {
   pinsData.getPinsByBoardId(boardID)
     .then((pins) => {
-      // console.log('here are the pins', pins);
+      console.log('here are the pins', pins);
       let domString = '<div id="boardSection" class="d-flex flex-wrap container"><span><button class="closeButton">x</button><span>';
       pins.forEach((pin) => {
         domString += pinsPrint.makeAPin(pin);
+        console.log('here are the pins id', pin.id);
         $('#newBoardButton').addClass('hide');
         $('#newPinButton').removeClass('hide');
-        $('.updatePin').attr('id', `updatePin-${pin.id}`);
       });
       domString += '</div>';
       utilities.printToDOM('printBoard', domString);
       $('#addNewPin').attr('storeBoardID', boardID);
       $('#boardSection').on('click', '.closeButton', close);
-      $('#updatePinModal').on('click', '.updatePin', updatePin);
+      $('.updatePinButton').click(updatePinHandler);
+      $('#updatePinModal').on('click', '.saveUpdatePinButton', updatePin);
       $('#newPinButton').removeClass('hide');
     })
     .catch((error) => console.error(error));
@@ -87,7 +95,7 @@ const showSingleBoard = (boardID) => {
 
 const showSingleBoardEventHandler = (e) => {
   const boardID = e.target.id;
-  console.log('from show single board event handler', boardID);
+  // console.log('from show single board event handler', boardID);
   showSingleBoard(boardID);
 };
 
@@ -95,7 +103,7 @@ const deleteBoard = (e) => {
   e.preventDefault();
   const { uid } = firebase.auth().currentUser;
   const boardID = e.target.id.split('board-')[1];
-  console.log('from delete board', boardID);
+  // console.log('from delete board', boardID);
   boardsData.deleteBoard(boardID)
     .then(() => {
       pinsData.getPinsByBoardId(boardID).then((pins) => {

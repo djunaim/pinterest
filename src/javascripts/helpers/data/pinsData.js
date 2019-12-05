@@ -28,7 +28,7 @@ const getPin = (pinsID, newBoardID) => new Promise((resolve, reject) => {
     .then((result) => {
       const pinObject = result.data;
       pinObject.boardID = newBoardID;
-      console.log('from getPin', pinsID, newBoardID);
+      console.log('from getpin', pinObject, pinsID);
       updateNewPin(pinsID, pinObject);
       resolve();
     })

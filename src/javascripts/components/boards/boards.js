@@ -23,7 +23,7 @@ const makeABoard = (board) => {
     domString += `
     <div class="card col-md-4 boardCard stretched-link" id="${board.id}">
     <img src="${board.imageURL}" class="card-img-top" alt="...">
-      <p>${board.type}</p>
+      <p id="boardDescription">${board.type}</p>
       <button href="#" class="btn btn-danger deleteBoard" id="board-${board.id}">Delete</button>
     </div>
     `;

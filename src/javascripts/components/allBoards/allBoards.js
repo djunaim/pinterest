@@ -41,9 +41,7 @@ const updatePin = (e) => {
   e.stopImmediatePropagation();
   const { uid } = firebase.auth().currentUser;
   const pinID = e.target.id.split('updatePin-')[1];
-  // console.log('from updatePin pinId', pinID);
   const boardID = $('input[name=boardRadios]:checked').val();
-  // console.log('from updatePin boardId', boardID);
   pinsData.getPin(pinID, boardID)
     .then(() => {
       $('#updatePinModal').modal('hide');
@@ -54,7 +52,6 @@ const updatePin = (e) => {
 
 const updatePinHandler = (e) => {
   const pinID = e.target.id.split('pin-')[1];
-  // console.log('from updatePinHandler', pinID);
   $('.saveUpdatePinButton').attr('id', `updatePin-${pinID}`);
 };
 
@@ -74,11 +71,9 @@ const close = () => {
 const showSingleBoard = (boardID) => {
   pinsData.getPinsByBoardId(boardID)
     .then((pins) => {
-      console.log('here are the pins', pins);
-      let domString = '<div id="boardSection" class="d-flex flex-wrap container"><span><button class="closeButton">x</button><span>';
+      let domString = '<div id="boardSection" class="container"><span><button class="closeButton">x</button><span>';
       pins.forEach((pin) => {
         domString += pinsPrint.makeAPin(pin);
-        console.log('here are the pins id', pin.id);
         $('#newBoardButton').addClass('hide');
         $('#newPinButton').removeClass('hide');
       });
@@ -95,7 +90,6 @@ const showSingleBoard = (boardID) => {
 
 const showSingleBoardEventHandler = (e) => {
   const boardID = e.target.id;
-  // console.log('from show single board event handler', boardID);
   showSingleBoard(boardID);
 };
 
@@ -103,7 +97,6 @@ const deleteBoard = (e) => {
   e.preventDefault();
   const { uid } = firebase.auth().currentUser;
   const boardID = e.target.id.split('board-')[1];
-  // console.log('from delete board', boardID);
   boardsData.deleteBoard(boardID)
     .then(() => {
       pinsData.getPinsByBoardId(boardID).then((pins) => {
@@ -137,12 +130,10 @@ const addNewBoard = (e) => {
 const buildAllBoard = (uid) => {
   boardsData.getBoardByUid(uid)
     .then((boards) => {
-      // console.log('here are the boards', boards);
       let domString = '<div id="boardSection" class="d-flex flex-wrap">';
       boards.forEach((board) => {
         domString += boardsPrint.makeABoard(board);
       });
-      //  have domString2 to dynamically print newboards as radio options
       let domString2 = '<div>';
       boards.forEach((board) => {
         domString2 += boardsPrint.boardRadioOptions(board);

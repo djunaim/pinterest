@@ -6,7 +6,8 @@ This is a spin-off of pinterest. When you log in, you can see the boards that ar
 Once you click on a board, a single board will show all the pins that are applicable to it and you can also add, edit, or delete pins.
 
 ## Screenshots
-![]()
+![homepage](https://raw.githubusercontent.com/djunaim/pinterest/master/screenshots/homepage.PNG)
+![singlepage](https://raw.githubusercontent.com/djunaim/pinterest/master/screenshots/singleBoard.PNG)
 
 # Instructions on How to Run
 * clone down this project

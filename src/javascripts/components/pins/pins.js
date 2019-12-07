@@ -1,4 +1,5 @@
 import 'bootstrap';
+import './pins.scss';
 
 const makeAPin = (pin) => {
   let domString = '';

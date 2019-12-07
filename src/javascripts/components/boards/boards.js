@@ -21,9 +21,9 @@ const makeABoard = (board) => {
   let domString = '';
   if (board.id) {
     domString += `
-    <div class="card col-md-4 boardCard stretched-link" id="${board.id}">
+    <div class="card col-md-4 boardCard" id="${board.id}">
     <img src="${board.imageURL}" class="card-img-top" alt="...">
-      <p id="boardDescription">${board.type}</p>
+      <p id="boardName">${board.type}</p>
       <button href="#" class="btn btn-danger deleteBoard" id="board-${board.id}">Delete</button>
     </div>
     `;

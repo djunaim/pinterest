@@ -4,7 +4,7 @@ const makeAPin = (pin) => {
   let domString = '';
   if (pin.id) {
     domString += `
-    <div class="card pinsCard col-md-3"> 
+    <div class="card pinsCard col-md-4"> 
     <img src="${pin.imageURL}" class="card-img-top" alt="...">
       <div class="card-body">
         <h5 class="card-title">${pin.siteURL}</h5>

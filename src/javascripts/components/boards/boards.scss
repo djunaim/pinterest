@@ -1,8 +1,13 @@
-.boardCard[data-clickable=true] {
-  margin: 10px 10px;
-  cursor: pointer;
+#boardName {
+  text-align: center;
 }
 
-#boardDescription {
-  text-align: center;
+.boardCard {
+  * {
+    pointer-events: none;
+  }
+}
+
+.deleteBoard {
+  pointer-events: auto;
 }
